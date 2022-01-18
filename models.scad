@@ -5,7 +5,7 @@ height = 10;
 //corner_radius = 
 
 //thickness of wall of box
-wall_thickness = 1;
+wall_thickness = .8;
 
 
 //a rounded box, with optional lid
@@ -53,5 +53,19 @@ module rounded_box(l,w,h,wt,lid){
     }
 }
 
-
-rounded_box(length,width,height,wall_thickness,true);
+difference(){
+    rounded_box(length,width,height,wall_thickness,true);
+    
+    //holes in wall
+    for(i= [1:5]){
+        translate([0,0,i*1.5]){
+            cube([10,20,.4],center=true);
+        }
+    }
+    //hole in lid
+     translate([0,0,height]){
+        linear_extrude(){
+               circle(1);
+        }
+    }
+}
